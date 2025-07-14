@@ -1,0 +1,1 @@
+Put your static images and banners here, e.g. saree.jpg, kurti.jpg, ad1.jpg, ad2.jpg, etc. 
