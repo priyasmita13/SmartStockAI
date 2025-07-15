@@ -2,15 +2,17 @@
 
 import React from 'react';
 import { Package, Tag, AlertTriangle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const ProductCard = ({ product }) => {
+  const { t } = useTranslation();
   const getStockStatus = (stock) => {
     if (stock === 0) {
-      return { text: 'Out of Stock', color: 'bg-red-100 text-red-800', icon: <AlertTriangle size={16} /> };
+      return { text: t('Out of Stock'), color: 'bg-red-100 text-red-800', icon: <AlertTriangle size={16} /> };
     } else if (stock < 5) {
-      return { text: 'Low Stock', color: 'bg-yellow-100 text-yellow-800', icon: <AlertTriangle size={16} /> };
+      return { text: t('Low Stock'), color: 'bg-yellow-100 text-yellow-800', icon: <AlertTriangle size={16} /> };
     } else {
-      return { text: 'In Stock', color: 'bg-green-100 text-green-800', icon: <Package size={16} /> };
+      return { text: t('In Stock'), color: 'bg-green-100 text-green-800', icon: <Package size={16} /> };
     }
   };
 
@@ -35,14 +37,14 @@ const ProductCard = ({ product }) => {
           <span>{product.category}</span>
         </div>
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-500 dark:text-gray-400">ID: {product.catalogId}</span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">{t('ID')}: {product.catalogId}</span>
           <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${stockStatus.color}`}>
             {stockStatus.icon}
             <span>{stockStatus.text}</span>
           </div>
         </div>
         <div className="text-sm text-gray-500 dark:text-gray-400">
-          Stock: {product.stock} units
+          {t('Stock')}: {product.stock} {t('units')}
         </div>
       </div>
     </div>

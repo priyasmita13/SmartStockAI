@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
-import Header from './components/Header';
+import WelcomePopup from './components/WelcomePopup';
+import LanguageModal from './components/LanguageModal';
+import { useTranslation } from 'react-i18next';
+import { user } from './data/mockData';
 
-const App = ({ children }) => (
-  <div className="flex min-h-screen">
-    <Sidebar />
-    <div className="flex-1 flex flex-col">
-      <Header />
-      <main className="flex-1 p-4 bg-gray-50 dark:bg-gray-900">{children}</main>
-    </div>
-  </div>
-);
+const App = () => {
+  const { i18n } = useTranslation();
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [showLangModal, setShowLangModal] = useState(false);
+
+  useEffect(() => {
+    const lang = localStorage.getItem('lang');
+    if (!lang) {
+      setShowLangModal(true);
+    } else {
+      i18n.changeLanguage(lang);
+    }
+  }, [i18n]);
+
+  const handleLanguageSelect = (lang) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem('lang', lang);
+    setShowLangModal(false);
+  };
+
+  return (
+    <>
+      <LanguageModal open={showLangModal} onSelect={handleLanguageSelect} />
+      <Sidebar />
+      <WelcomePopup open={showWelcome} onClose={() => setShowWelcome(false)} user={user} />
+    </>
+  );
+};
 
 export default App; 
