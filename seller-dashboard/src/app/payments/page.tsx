@@ -7,7 +7,7 @@ const Payments = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Payments</h1>
+        <h1 className="text-2xl font-bold text-black">Payments</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

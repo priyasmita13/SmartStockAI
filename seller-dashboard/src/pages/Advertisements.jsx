@@ -8,8 +8,8 @@ const Advertisements = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Advertisements</h1>
-        <button className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+        <h1 className="text-2xl font-bold text-black">Advertisements</h1>
+        <button className="flex items-center gap-2 px-4 py-2" style={{ background: '#8E4585', color: 'white', borderRadius: '0.5rem' }}>
           <Plus size={20} />
           Create New Ad
         </button>

@@ -15,7 +15,10 @@ const Sidebar = () => {
   return (
     <aside className="flex flex-col justify-between h-screen w-64 bg-black border-r border-gray-800 p-4 fixed left-0 top-0 z-20">
       <div>
-        <h2 className="text-2xl font-bold mb-8 text-center text-[#4A148C]">{t('Seller Dashboard')}</h2>
+        <div className="flex items-center justify-center mb-8 gap-2">
+          <img src="/logo.jpeg" alt="Logo" className="w-10 h-10 rounded-full bg-white" />
+          <h2 className="text-2xl font-bold text-center" style={{ color: '#FFB6D9', fontFamily: 'Canva Sans, sans-serif', fontWeight: 'bold' }}>Meesho User</h2>
+        </div>
         <nav className="flex flex-col gap-2">
           <SidebarButton icon={<Home />} label={t('Home')} href="/" active={pathname === '/'} />
           <SidebarButton icon={<Package />} label={t('Orders')} href="/orders" active={pathname === '/orders'} />
@@ -25,20 +28,21 @@ const Sidebar = () => {
           <SidebarButton icon={<Boxes />} label={t('Inventory')} href="/inventory" active={pathname === '/inventory'} />
           <SidebarButton icon={<Upload />} label={t('Catalog Uploads')} href="#" disabled />
           <SidebarButton icon={<Percent />} label={t('Promotions')} href="#" disabled />
-          <SidebarButton icon={<Image />} label={t('Image Upload')} href="#" disabled />
+          <SidebarButton icon={<Image />} label={t('Recommendations')} href="#" disabled />
         </nav>
       </div>
       <div className="mb-2">
         {!aiOpen ? (
           <button
-            className="w-full px-4 py-2 bg-[#4A148C] text-white rounded-lg hover:bg-[#6A1B9A] transition disabled:opacity-50 flex items-center justify-center"
+            className="w-full px-4 py-2 bg-[#580A46] text-white rounded-lg hover:bg-[#580A46] transition disabled:opacity-50 flex items-center justify-center gap-2"
             onClick={() => setAiOpen(true)}
           >
+            <img src="/AI.jpeg" alt="AI Logo" className="w-7 h-7 rounded-full bg-white" />
             {t('Open SmartStock AI')}
           </button>
         ) : (
           <button
-            className="w-full px-4 py-2 bg-[#4A148C] text-white rounded-lg hover:bg-[#6A1B9A] transition disabled:opacity-50 flex items-center justify-center"
+            className="w-full px-4 py-2 bg-[#580A46] text-white rounded-lg hover:bg-[#580A46] transition disabled:opacity-50 flex items-center justify-center"
             onClick={() => setAiOpen(false)}
           >
             {t('Close SmartStock AI')}
@@ -57,9 +61,9 @@ const SidebarButton = ({ icon, label, href, active, disabled }) => {
   return (
     <Component
       {...props}
-      className={`flex items-center gap-3 px-4 py-2 rounded-lg text-left transition text-gray-300
-        ${active ? 'bg-[#4A148C] text-white font-semibold' : 'hover:bg-gray-800 text-gray-300'}
-        ${disabled ? 'opacity-50 cursor-not-allowed text-gray-600' : ''}`}
+      className={`flex items-center gap-3 px-4 py-2 rounded-lg text-left transition text-white
+        ${active ? 'bg-[#580A46] text-white font-semibold' : 'hover:bg-gray-800 text-white'}
+        ${disabled ? 'opacity-50 cursor-not-allowed text-white' : ''}`}
       disabled={disabled}
     >
       {icon}

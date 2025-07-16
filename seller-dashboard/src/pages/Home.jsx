@@ -20,7 +20,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div style={{ background: '#D7BFDC', minHeight: '100vh' }}>
       <WelcomePopup open={showWelcome} onClose={() => setShowWelcome(false)} user={user} />
       {/* To-Do Summary */}
       <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -30,26 +30,26 @@ const Home = () => {
         <SummaryCard label="Low Stock" count={lowStock} color="bg-orange-100 text-orange-800" />
       </section>
       {/* Business Insights Chart */}
-      <section className="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
-        <h3 className="text-lg font-semibold mb-4 text-purple-700">Business Insights</h3>
+      <section className="rounded-xl shadow p-6 mt-12 w-2/3 mx-auto" style={{ background: '#2c0821' }}>
+        <h3 className="text-lg font-semibold mb-4 text-white">Business Insights</h3>
         <StockChart />
       </section>
       {/* Meesho Ad Banner */}
-      <section className="flex justify-center">
-        <img src="/assets/ad1.jpg" alt="Meesho Ad Banner" className="rounded-xl shadow w-full max-w-2xl h-40 object-cover" />
+      <section className="flex justify-center mt-12 mb-12">
+        <img src="/banner.jpg" alt="Meesho Ad Banner" className="rounded-xl shadow w-full max-w-2xl h-40 object-contain" />
       </section>
       {/* Useful Links & Announcements */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-purple-50 dark:bg-purple-900 rounded-xl p-4 shadow">
-          <h4 className="font-bold mb-2 text-purple-700">Useful Links</h4>
+        <div className="rounded-xl p-4 shadow" style={{ background: '#A84370' }}>
+          <h4 className="font-bold mb-2 text-blue-700">Useful Links</h4>
           <ul className="list-disc ml-5 text-purple-800 dark:text-purple-200">
             <li><a href="#" className="underline">How to process orders</a></li>
             <li><a href="#" className="underline">Inventory management tips</a></li>
             <li><a href="#" className="underline">Contact Seller Support</a></li>
           </ul>
         </div>
-        <div className="bg-blue-50 dark:bg-blue-900 rounded-xl p-4 shadow">
-          <h4 className="font-bold mb-2 text-blue-700">Announcements</h4>
+        <div className="rounded-xl p-4 shadow" style={{ background: '#A84370' }}>
+          <h4 className="font-bold mb-2 text-purple-700">Announcements</h4>
           <ul className="list-disc ml-5 text-blue-800 dark:text-blue-200">
             <li>Festival Sale starts next week!</li>
             <li>New features coming soon to SmartStock AI.</li>

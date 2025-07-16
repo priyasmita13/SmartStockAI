@@ -16,13 +16,13 @@ const StockChart = () => {
 
   return (
     <LineChart width={600} height={300} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-      <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+      <CartesianGrid strokeDasharray="3 3" stroke="#fff" />
+      <XAxis dataKey="name" stroke="#fff" tick={{ fill: '#fff' }} />
+      <YAxis stroke="#fff" tick={{ fill: '#fff' }} />
+      <Tooltip contentStyle={{ background: '#2c0821', color: '#fff', border: '1px solid #FFB6D9' }} itemStyle={{ color: '#FFB6D9' }} labelStyle={{ color: '#FFE066' }} />
+      <Legend wrapperStyle={{ color: '#fff' }} />
+      <Line type="monotone" dataKey="pv" stroke="#FFB6D9" activeDot={{ r: 8 }} />
+      <Line type="monotone" dataKey="uv" stroke="#FFE066" />
     </LineChart>
   );
 };

@@ -15,7 +15,7 @@ const SidebarButton = ({ icon, label, href, active, disabled, onClick }) => {
     <Component
       {...props}
       className={`flex items-center gap-3 px-4 py-2 rounded-lg text-left transition text-gray-300 w-full
-        ${active ? 'bg-[#4A148C] text-white font-semibold' : 'hover:bg-gray-800 text-gray-300'}
+        ${active ? 'bg-[#580A46] text-white font-semibold' : 'hover:bg-gray-800 text-gray-300'}
         ${disabled ? 'opacity-50 cursor-not-allowed text-gray-600' : ''}`}
       disabled={disabled}
     >
@@ -177,11 +177,11 @@ const SmartStockAI = ({ open, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex">
+    <div className="fixed inset-0 z-50 flex" style={{ background: '#DDA0DD' }}>
       {/* Sidebar (Task Pane) */}
       <aside className="flex flex-col justify-between h-full w-64 bg-black border-r border-gray-800 p-4">
         <div>
-          <h2 className="text-2xl font-bold mb-8 text-center text-[#4A148C]">Seller Dashboard</h2>
+          <h2 className="text-2xl font-bold mb-8 text-center text-[#580A46]">Seller Dashboard</h2>
           <nav className="flex flex-col gap-2">
             <SidebarButton icon={<Home />} label="Home" href="/" />
             <SidebarButton icon={<Package />} label="Orders" href="/orders" />
@@ -196,7 +196,7 @@ const SmartStockAI = ({ open, onClose }) => {
         </div>
         <div className="mb-2">
           <button
-            className="flex items-center gap-2 w-full px-4 py-2 bg-[#4A148C] text-white rounded-lg hover:bg-[#6A1B9A] transition disabled:opacity-50"
+            className="flex items-center gap-2 w-full px-4 py-2 bg-[#580A46] text-white rounded-lg hover:bg-[#580A46] transition disabled:opacity-50"
             onClick={onClose}
           >
             <Bot size={20} />

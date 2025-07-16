@@ -19,7 +19,7 @@ const Returns = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Returns</h1>
+        <h1 className="text-2xl font-bold text-black">Returns</h1>
       </div>
 
       {returns.length > 0 ? (
