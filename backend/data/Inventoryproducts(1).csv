@@ -1,0 +1,13 @@
+product_id,name,category,price,cost,status,stock_quantity,restock_threshold,last_sold_date
+1,Black T-shirt,T-shirt,499,300,active,2,10,19/06/2024
+2,Cotton  Shorts,Shorts,399,260,active,2,5,22/06/2024
+3,Women Casual Kurti,Kurti,699,420,active,8,6,14/07/2024
+4,Full-sleeve Denim Jacket,Jacket,1299,800,active,1,4,23/12/2024
+5,Kids Printed Hoodie,Kidswear,599,370,paused,50,3,24/01/2025
+6,Men Cotton Pyjama Set,Sleepwear,899,550,active,4,5,24/06/2025
+7,Kurta Set ,Ethnicwear,1199,720,active,0,5,06/07/2025
+8,Woolen Pullover,Winterwear,999,650,active,15,10,14/12/2024
+9,Pink Cotton Saree,Saree,999,700,active,7,5,26/03/2025
+10, White T-shirt,T-shirt,299,150,active,9,5,09/07/2025
+11,Transparent Raincoat,Rainwear,599,200,active,15,5,13/07/2025
+12,Floral Dress,Western,499,299,active,27,8,24/04/2025
