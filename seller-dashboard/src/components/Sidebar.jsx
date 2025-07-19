@@ -61,8 +61,8 @@ const Sidebar = ({ aiOpen, setAiOpen, onToggle }) => {
           }}
         >
           <motion.img 
-            src="/logo.jpeg" 
-            alt="Logo" 
+            src="/girl.png" 
+            alt="Girl" 
             className="w-10 h-10 rounded-full bg-white cursor-pointer shadow-lg"
             whileHover={{ 
               scale: 1.1, 
@@ -75,7 +75,7 @@ const Sidebar = ({ aiOpen, setAiOpen, onToggle }) => {
             {!isCollapsed && (
               <motion.h2 
                 key="title"
-                className="text-2xl font-bold text-center cursor-pointer whitespace-nowrap" 
+                className="text-2xl font-bold text-left cursor-pointer whitespace-nowrap" 
                 style={{ color: '#FFB6D9', fontFamily: 'Canva Sans, sans-serif', fontWeight: 'bold' }}
                 initial={{ opacity: 0, width: 0, x: -20 }}
                 animate={{ opacity: 1, width: 'auto', x: 0 }}
@@ -85,7 +85,7 @@ const Sidebar = ({ aiOpen, setAiOpen, onToggle }) => {
                   ease: [0.25, 0.46, 0.45, 0.94]
                 }}
               >
-                Meesho User
+                Roshni Mishra
               </motion.h2>
             )}
           </AnimatePresence>
@@ -97,17 +97,14 @@ const Sidebar = ({ aiOpen, setAiOpen, onToggle }) => {
           <SidebarButton icon={<Megaphone />} label={t('Advertisements')} href="/advertisements" active={pathname === '/advertisements'} isCollapsed={isCollapsed} />
           <SidebarButton icon={<CreditCard />} label={t('Payments')} href="/payments" active={pathname === '/payments'} isCollapsed={isCollapsed} />
           <SidebarButton icon={<Boxes />} label={t('Inventory')} href="/inventory" active={pathname === '/inventory'} isCollapsed={isCollapsed} />
-          <SidebarButton icon={<Upload />} label={t('Catalog Uploads')} href="#" disabled isCollapsed={isCollapsed} />
-          <SidebarButton icon={<Percent />} label={t('Promotions')} href="#" disabled isCollapsed={isCollapsed} />
-          <SidebarButton icon={<Image />} label={t('Recommendations')} href="#" disabled isCollapsed={isCollapsed} />
+          <SidebarButton icon={<Upload />} label={t('Add Catalogue')} href="/add-catalogue" active={pathname === '/add-catalogue'} isCollapsed={isCollapsed} />
+          <SidebarButton icon={<Percent />} label={t('Promo')} href="/promo" active={pathname === '/promo'} isCollapsed={isCollapsed} />
         </nav>
-      </div>
-      <div className={`${sidebarPadding} pb-4`}>
         <AnimatePresence mode="wait">
           {!aiOpen ? (
             <motion.button
               key="open-ai"
-              className={`px-4 py-2 bg-[#580A46] text-white rounded-lg hover:bg-[#580A46] transition disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer w-full`}
+              className={`px-4 py-2 bg-[#580A46] text-white rounded-lg hover:bg-[#580A46] transition disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer w-full mt-2`}
               onClick={() => setAiOpen(true)}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -161,7 +158,7 @@ const Sidebar = ({ aiOpen, setAiOpen, onToggle }) => {
           ) : (
             <motion.button
               key="close-ai"
-              className={`px-4 py-2 bg-[#580A46] text-white rounded-lg hover:bg-[#580A46] transition disabled:opacity-50 flex items-center justify-center cursor-pointer w-full`}
+              className={`px-4 py-2 bg-[#580A46] text-white rounded-lg hover:bg-[#580A46] transition disabled:opacity-50 flex items-center justify-center cursor-pointer w-full mt-2`}
               onClick={() => setAiOpen(false)}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

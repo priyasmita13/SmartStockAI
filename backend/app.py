@@ -30,6 +30,12 @@ sales_pdf_generator = SalesPDFGenerator()
 chatbot_service = ChatbotService()
 forecasting_service = ForecastingService()
 
+@app.errorhandler(Exception)
+def handle_exception(e):
+    import traceback
+    traceback.print_exc()
+    return jsonify({"error": str(e)}), 500
+
 @app.route('/api/health', methods=['GET'])
 def health_check():
     return jsonify({"status": "healthy", "message": "SmartStock AI Flask Backend is running"})
@@ -101,7 +107,9 @@ def generate_sales_report():
 def chatbot_query():
     data = request.get_json()
     user_message = data.get('message', '')
-    response = chatbot_service.process_message(user_message)
+    lang = data.get('lang', 'en')
+    print(f"DEBUG: Received chatbot query: message='{user_message}', lang='{lang}'")
+    response = chatbot_service.process_message(user_message, lang=lang)
     # Extract PDF filename if present
     pdf_url = None
     if response:
@@ -109,6 +117,8 @@ def chatbot_query():
         match = re.search(r'Download: `([^`]+)`', response)
         if match:
             pdf_url = f"/backend/reports/{match.group(1)}"
+    print(f"DEBUG: chatbot_query response: {response}")
+    print(f"DEBUG: chatbot_query pdf_url: {pdf_url}")
     return jsonify({'response': response, 'pdf_url': pdf_url})
 
 @app.route('/api/inventory/analytics', methods=['GET'])

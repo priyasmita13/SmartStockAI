@@ -52,6 +52,7 @@ class ForecastingService:
             if festival_path.exists():
                 self.festival_df = pd.read_csv(festival_path)
                 print(f"✅ Loaded festival data: {len(self.festival_df)} festival records")
+                print(f"Festival DataFrame columns: {self.festival_df.columns.tolist()}")
             
             return True
         except Exception as e:
@@ -177,7 +178,7 @@ class ForecastingService:
             month = row['month']
             festival = row['festival'] if pd.notna(row['festival']) else None
             season = row['season'] if pd.notna(row['season']) else None
-            product_name = row['product_name']
+            product_name = row['product_name'] if 'product_name' in row else row['name']
             if month not in festival_map:
                 festival_map[month] = {}
             if product_name not in festival_map[month]:
@@ -216,63 +217,86 @@ class ForecastingService:
         return forecast
     
     def generate_restock_plan(self, test_month: int = None) -> Dict:
-        """Generate comprehensive restock plan based on forecasts and current inventory. Accepts test_month for testing."""
-        if self.inventory_df is None:
-            return {}
-        demand_forecast = self.forecast_upcoming_demand(test_month=test_month)
-        current_inventory = self.inventory_df.set_index('product_id').to_dict('index')
-        restock_plan = {'monthly_plans': {}}
-        for month, forecast_data in demand_forecast.items():
-            month_plan = {'month': month, 'product_recommendations': []}
-            for product_id, forecast_info in forecast_data.items():
-                if product_id in current_inventory:
-                    current_stock = current_inventory[product_id]['stock_quantity']
-                    restock_threshold = current_inventory[product_id]['restock_threshold']
-                    product_cost = current_inventory[product_id]['cost']
-                    forecasted_demand = forecast_info['forecasted_demand']
-                    reason = forecast_info['reason']
-                    demand_gap = forecasted_demand - current_stock
-                    if demand_gap > restock_threshold:
-                        recommended_restock = demand_gap
-                        demand_type = 'High demand'
-                    else:
-                        recommended_restock = restock_threshold + 5
-                        demand_type = 'Low demand'
-                    final_reason = reason if reason else demand_type
-                    month_plan['product_recommendations'].append({
-                        'product_id': product_id,
-                        'product_name': current_inventory[product_id]['name'],
-                        'category': current_inventory[product_id]['category'],
-                        'current_stock': current_stock,
-                        'forecasted_demand': forecasted_demand,
-                        'restock_threshold': restock_threshold,
-                        'recommended_restock': int(round(recommended_restock)),
-                        'reason': final_reason,
-                        'cost': product_cost
-                    })
-            restock_plan['monthly_plans'][month] = month_plan
-        # Calculate summary
-        total_restock_quantity = 0
-        total_restock_value = 0
-        products_to_restock = 0
-        products_to_reduce = 0
-        for month_plan in restock_plan['monthly_plans'].values():
-            for rec in month_plan['product_recommendations']:
-                qty = rec['recommended_restock']
-                if qty > 0:
-                    total_restock_quantity += qty
-                    total_restock_value += qty * rec['cost']
-                    products_to_restock += 1
-                elif qty < 0:
-                    products_to_reduce += 1
-        restock_plan['summary'] = {
-            'total_restock_quantity': total_restock_quantity,
-            'total_restock_value': int(round(total_restock_value)),
-            'products_to_restock': products_to_restock,
-            'products_to_reduce': products_to_reduce
-        }
-        restock_plan['forecast_period'] = f"{len(restock_plan['monthly_plans'])} months"
-        return restock_plan
+        try:
+            if self.inventory_df is None:
+                return {}
+            demand_forecast = self.forecast_upcoming_demand(test_month=test_month)
+            current_inventory = self.inventory_df.set_index('product_id').to_dict('index')
+            restock_plan = {'monthly_plans': {}}
+            for month, forecast_data in demand_forecast.items():
+                month_plan = {'month': month, 'product_recommendations': []}
+                for product_id, forecast_info in forecast_data.items():
+                    if product_id in current_inventory:
+                        current_stock = current_inventory[product_id]['stock_quantity']
+                        restock_threshold = current_inventory[product_id]['restock_threshold']
+                        product_cost = current_inventory[product_id]['cost']
+                        forecasted_demand = forecast_info['forecasted_demand']
+                        reason = forecast_info['reason']
+                        demand_gap = forecasted_demand - current_stock
+                        if demand_gap > restock_threshold:
+                            recommended_restock = demand_gap
+                            demand_type = 'High demand'
+                        else:
+                            recommended_restock = restock_threshold + 5
+                            demand_type = 'Low demand'
+                        final_reason = reason if reason else demand_type
+                        month_plan['product_recommendations'].append({
+                            'product_id': product_id,
+                            'name': current_inventory[product_id]['name'],
+                            'product_name': current_inventory[product_id]['name'],
+                            'category': current_inventory[product_id]['category'],
+                            'current_stock': current_stock,
+                            'forecasted_demand': forecasted_demand,
+                            'restock_threshold': restock_threshold,
+                            'recommended_restock': int(round(recommended_restock)),
+                            'reason': final_reason,
+                            'cost': product_cost
+                        })
+                restock_plan['monthly_plans'][month] = month_plan
+            # Calculate summary
+            total_restock_quantity = 0
+            total_restock_value = 0
+            products_to_restock = 0
+            products_to_reduce = 0
+            for month_plan in restock_plan['monthly_plans'].values():
+                for rec in month_plan['product_recommendations']:
+                    qty = rec['recommended_restock']
+                    if qty > 0:
+                        total_restock_quantity += qty
+                        total_restock_value += qty * rec['cost']
+                        products_to_restock += 1
+                    elif qty < 0:
+                        products_to_reduce += 1
+            restock_plan['summary'] = {
+                'total_restock_quantity': total_restock_quantity,
+                'total_restock_value': int(round(total_restock_value)),
+                'products_to_restock': products_to_restock,
+                'products_to_reduce': products_to_reduce
+            }
+            restock_plan['forecast_period'] = f"{len(restock_plan['monthly_plans'])} months"
+            # Debug: print any product_recommendations missing 'product_name'
+            for month, month_plan in restock_plan['monthly_plans'].items():
+                for rec in month_plan['product_recommendations']:
+                    if 'product_name' not in rec:
+                        print(f"DEBUG: Missing product_name in recommendation: {rec}")
+            return restock_plan
+        except KeyError as ke:
+            if str(ke) == "'product_name'":
+                import traceback
+                print('KeyError for product_name! Full traceback:')
+                traceback.print_exc()
+                # Print all product_recommendations for inspection
+                try:
+                    for month, month_plan in restock_plan['monthly_plans'].items():
+                        for rec in month_plan['product_recommendations']:
+                            print('PRODUCT RECOMMENDATION:', rec)
+                except Exception as e:
+                    print('Could not print product_recommendations:', e)
+            raise
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return f"Error generating restock plan: {e}"
     
     def _generate_high_level_recommendations(self, restock_plan: Dict) -> List[Dict]:
         """Generate high-level business recommendations"""
@@ -496,7 +520,7 @@ class ForecastingService:
                 c.rect(inch-0.1*inch, y-0.04*inch, 6.2*inch, 0.19*inch, fill=1, stroke=0)
                 c.setFillColorRGB(0, 0, 0)
                 c.drawString(inch+0.05*inch, y, str(month))
-                c.drawString(inch+0.8*inch, y, f"{rec['product_name'][:18]}")
+                c.drawString(inch+0.8*inch, y, f"{rec.get('name', rec.get('product_name', ''))[:18]}")
                 c.drawString(inch+2.8*inch, y, f"{rec['category'][:10]}")
                 c.drawString(inch+3.8*inch, y, f"{rec['current_stock']}")
                 c.drawString(inch+4.4*inch, y, f"{rec['forecasted_demand']}")

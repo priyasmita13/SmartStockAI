@@ -40,3 +40,17 @@ body {
     background-position: 0% 50%;
   }
 }
+
+/* Responsive Scrollbar: auto-hide on mobile, always visible on desktop */
+html, body {
+  scrollbar-width: auto;
+}
+
+@media (max-width: 640px) {
+  html, body {
+    scrollbar-width: none;
+  }
+  body::-webkit-scrollbar, html::-webkit-scrollbar {
+    display: none;
+  }
+}

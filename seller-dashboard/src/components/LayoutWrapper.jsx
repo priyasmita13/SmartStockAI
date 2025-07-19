@@ -85,6 +85,19 @@ const LayoutWrapper = ({ children }) => {
     }
   }, []);
 
+  // Listen for custom event to open SmartStock AI from other components
+  useEffect(() => {
+    const handleOpenSmartStockAI = () => {
+      setAiOpen(true);
+    };
+
+    window.addEventListener('openSmartStockAI', handleOpenSmartStockAI);
+
+    return () => {
+      window.removeEventListener('openSmartStockAI', handleOpenSmartStockAI);
+    };
+  }, []);
+
   const handleIntroComplete = () => {
     setShowIntro(false);
     localStorage.setItem('hasSeenIntro', 'true');
