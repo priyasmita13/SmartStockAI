@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: smartstockai-backend
+    runtime: python
+    pythonVersion: "3.11.18"
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.18
+      - key: FLASK_ENV
+        value: production 
