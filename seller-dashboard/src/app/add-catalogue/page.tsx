@@ -1,24 +1,24 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, ChangeEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, Image, Bot, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 const AddCatalogue = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageSelect = (event) => {
-    const file = event.target.files[0];
+  const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (file) {
       setSelectedImage(file);
       const reader = new FileReader();
-      reader.onload = (e) => {
-        setImagePreview(e.target.result);
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        setImagePreview(e.target?.result as string);
       };
       reader.readAsDataURL(file);
     }
