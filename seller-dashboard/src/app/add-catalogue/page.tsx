@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, ChangeEvent } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, Image, Bot, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
