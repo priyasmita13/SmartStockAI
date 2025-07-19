@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "../components/LayoutWrapper";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Seller Dashboard",
@@ -17,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className + ' bg-white text-black dark:bg-[#0a0a0a] dark:text-white'}>
+      <body className="font-sans bg-white text-black dark:bg-[#0a0a0a] dark:text-white">
         <LayoutWrapper>
           {children}
         </LayoutWrapper>
