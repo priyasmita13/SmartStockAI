@@ -2,7 +2,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "framework": "nextjs",
-  "rootDirectory": "seller-dashboard",
   "installCommand": "npm install"
 }
   
