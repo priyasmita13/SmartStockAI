@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/chunkfive');
+@import "tailwindcss";
+
+:root {
+  --background: #DDA0DD;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: #D7BFDC;
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Banner Film Gradient Animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Responsive Scrollbar: auto-hide on mobile, always visible on desktop */
+html, body {
+  scrollbar-width: auto;
+}
+
+@media (max-width: 640px) {
+  html, body {
+    scrollbar-width: none;
+  }
+  body::-webkit-scrollbar, html::-webkit-scrollbar {
+    display: none;
+  }
+}
