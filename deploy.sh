@@ -30,9 +30,9 @@ echo "✅ Deployment requirements created"
 
 # Create runtime.txt for Python version
 echo "🐍 Setting Python version..."
-echo "python-3.11.18" > runtime.txt
+echo "python-3.10.18" > runtime.txt
 
-echo "✅ Python version set to 3.11.18"
+echo "✅ Python version set to 3.10.18"
 
 echo ""
 echo "🎉 Deployment files ready!"
@@ -42,7 +42,7 @@ echo "   2. Deploy to Render or your preferred platform"
 echo "   3. The backend will be available at your deployment URL"
 echo ""
 echo "🔧 Configuration:"
-echo "   - Python: 3.11.18"
+echo "   - Python: 3.10.18"
 echo "   - Framework: Flask"
 echo "   - Entry point: backend/app.py"
 echo "   - Port: $PORT (set by platform)" 
