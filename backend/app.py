@@ -16,6 +16,7 @@ from services.forecasting_service import ForecastingService
 from config import Config
 from flask import url_for
 import re
+from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
 CORS(app)
@@ -30,11 +31,18 @@ sales_pdf_generator = SalesPDFGenerator()
 chatbot_service = ChatbotService()
 forecasting_service = ForecastingService()
 
+@app.route("/", methods=["GET"])
+def index():
+    return jsonify({"message": "Welcome to SmartStockAI backend! See /api/health for status."})
+
 @app.errorhandler(Exception)
 def handle_exception(e):
     import traceback
     traceback.print_exc()
-    return jsonify({"error": str(e)}), 500
+    code = 500
+    if isinstance(e, HTTPException):
+        code = e.code
+    return jsonify({"error": str(e)}), code
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
