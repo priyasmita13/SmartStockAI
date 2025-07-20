@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, Package, Undo2, Megaphone, CreditCard, Boxes, Upload, Percent, Image, Bot, ArrowLeft, UserCircle, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { apiPost } from '../api';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 const BACKEND_BASE = API_BASE.replace(/\/api$/, '');
@@ -123,12 +124,7 @@ const SmartStockAI = ({ open, onClose }) => {
     setLoading(true);
     setChat((prev) => [...prev, { prompt: promptObj.label, response: null, pdfUrl: null }]);
     try {
-      const res = await fetch(`${API_BASE}/chatbot/query`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: promptObj.value, lang: i18n.language }),
-      });
-      const data = await res.json();
+      const data = await apiPost('/chatbot/query', { message: promptObj.value, lang: i18n.language });
       setChat((prev) => {
         const updated = [...prev];
         updated[updated.length - 1] = {
@@ -176,12 +172,7 @@ const SmartStockAI = ({ open, onClose }) => {
     setLoading(true);
     setChat((prev) => [...prev, { prompt: '', response: null, pdfUrl: null }]);
     try {
-      const res = await fetch(`${API_BASE}/chatbot/query`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message, lang: i18n.language }),
-      });
-      const data = await res.json();
+      const data = await apiPost('/chatbot/query', { message, lang: i18n.language });
       setChat((prev) => {
         const updated = [...prev];
         updated[updated.length - 1] = {
