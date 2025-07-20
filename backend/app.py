@@ -19,7 +19,7 @@ import re
 from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
-CORS(app, origins=["https://smart-stock-ai-ivory.vercel.app"])
+CORS(app, origins=["https://smart-stock-ai-ivory.vercel.app"], supports_credentials=True, methods=["GET", "POST", "OPTIONS"], allow_headers=["Content-Type"])
 
 # Configure app
 app.config['MAX_CONTENT_LENGTH'] = Config.MAX_CONTENT_LENGTH
