@@ -124,7 +124,7 @@ const SmartStockAI = ({ open, onClose }) => {
     setLoading(true);
     setChat((prev) => [...prev, { prompt: promptObj.label, response: null, pdfUrl: null }]);
     try {
-      const data = await apiPost('/chatbot/query', { message: promptObj.value, lang: i18n.language });
+      const data = await apiPost('/api/chatbot/query', { message: promptObj.value, lang: i18n.language });
       setChat((prev) => {
         const updated = [...prev];
         updated[updated.length - 1] = {
@@ -172,7 +172,7 @@ const SmartStockAI = ({ open, onClose }) => {
     setLoading(true);
     setChat((prev) => [...prev, { prompt: '', response: null, pdfUrl: null }]);
     try {
-      const data = await apiPost('/chatbot/query', { message, lang: i18n.language });
+      const data = await apiPost('/api/chatbot/query', { message, lang: i18n.language });
       setChat((prev) => {
         const updated = [...prev];
         updated[updated.length - 1] = {
