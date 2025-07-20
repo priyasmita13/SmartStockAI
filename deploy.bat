@@ -16,7 +16,7 @@ echo Flask==2.3.3
 echo Flask-CORS==4.0.0
 echo pandas==2.3.0
 echo matplotlib==3.9.0
-echo seaborn==0.14.0
+echo seaborn==0.13.2
 echo fpdf==1.7.2
 echo numpy==1.27.0
 echo Werkzeug==2.3.7
