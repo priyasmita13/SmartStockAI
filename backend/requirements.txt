@@ -10,3 +10,5 @@ numpy==1.23.0
 Werkzeug==2.3.7
 requests==2.31.0
 gunicorn
+reportlab==4.0.8
+deep-translator==1.11.4
