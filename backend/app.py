@@ -111,8 +111,10 @@ def generate_sales_report():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route('/api/chatbot/query', methods=['POST'])
+@app.route('/api/chatbot/query', methods=['POST', 'OPTIONS'])
 def chatbot_query():
+    if request.method == 'OPTIONS':
+        return '', 204
     data = request.get_json()
     user_message = data.get('message', '')
     lang = data.get('lang', 'en')
