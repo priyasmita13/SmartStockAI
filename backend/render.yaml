@@ -8,4 +8,4 @@ services:
     plan: free
     envVars:
       - key: FLASK_ENV
-        value: production 
+        value: production   
