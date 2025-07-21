@@ -74,10 +74,10 @@ const TypingAnimation = ({ text, speed = 50 }) => {
 const SmartStockAI = ({ open, onClose }) => {
   const { t, i18n } = useTranslation();
   const PROMPTS = [
-    { label: t('Your Monthly Restock Plan'), value: 'restock plan' },
     { label: t('Inventory Health'), value: 'inventory health' },
     { label: t('Sales Report'), value: 'sales report' },
     { label: t('Generate a weekly or monthly report'), value: 'generate a weekly or monthly report' },
+    { label: t('Your Monthly Restock Plan'), value: 'restock plan' },
     { label: t('Product listing assistance'), value: 'product listing assistance' },
     { label: t('Forecast Product Demand'), value: 'forecast product demand' },
     { label: t('Make More Profit'), value: 'make more profit' },
@@ -117,6 +117,17 @@ const SmartStockAI = ({ open, onClose }) => {
     if (productListingStep === 'done') setListingDone(true);
     else setListingDone(false);
   }, [productListingStep]);
+
+  // Hide page scrollbar when modal is open
+  useEffect(() => {
+    if (open) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [open]);
 
   if (!open) return null;
 
@@ -219,13 +230,28 @@ const SmartStockAI = ({ open, onClose }) => {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center min-h-screen min-w-full bg-gradient-to-br from-purple-200 via-pink-100 to-purple-300"
+      className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center min-h-screen min-w-full bg-gradient-to-br from-purple-200 via-pink-100 to-purple-300"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
       style={{ background: 'linear-gradient(135deg, #DDA0DD 0%, #F3E6F5 100%)' }}
     >
+      {/* Language Selector - fixed to top left of viewport, visually matching close button */}
+      <div className="fixed top-6 left-8 z-[1001] flex items-center gap-2 bg-gray-900/95 dark:bg-gray-900 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 px-4 py-2 backdrop-blur-md" style={{ minWidth: '120px' }}>
+        <label htmlFor="language-select" className="text-sm font-medium text-gray-100 dark:text-gray-200 mr-1">Lang:</label>
+        <select
+          id="language-select"
+          value={i18n.language}
+          onChange={e => i18n.changeLanguage(e.target.value)}
+          className="border-none outline-none bg-transparent text-gray-100 dark:text-gray-100 text-sm cursor-pointer"
+          style={{ background: '#18181b', color: '#f3f4f6' }}
+        >
+          <option value="en" style={{ background: '#18181b', color: '#f3f4f6' }}>EN</option>
+          <option value="hi" style={{ background: '#18181b', color: '#f3f4f6' }}>हिन्दी</option>
+          <option value="bn" style={{ background: '#18181b', color: '#f3f4f6' }}>বাংলা</option>
+        </select>
+      </div>
       {/* Close Button - fixed to top right of viewport, outside modal container */}
       <div className="fixed top-6 right-8 z-[1001] group">
         <button
@@ -239,20 +265,6 @@ const SmartStockAI = ({ open, onClose }) => {
       </div>
       <div className="relative flex flex-col items-center w-full max-w-6xl mx-auto p-0 sm:p-8 bg-gradient-to-br from-purple-900 via-pink-700 to-purple-400 bg-[length:200%_200%] bg-no-repeat rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700"
         style={{ boxShadow: '0 8px 32px 0 rgba(88,10,70,0.18)' }}>
-        {/* Language Selector - top right */}
-        <div className="absolute top-6 right-8 flex items-center gap-2">
-          <label htmlFor="language-select" className="text-sm font-medium text-gray-200 dark:text-gray-300">Lang:</label>
-          <select
-            id="language-select"
-            value={i18n.language}
-            onChange={e => i18n.changeLanguage(e.target.value)}
-            className="border rounded px-2 py-1 bg-white/80 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm"
-          >
-            <option value="en">EN</option>
-            <option value="hi">हिन्दी</option>
-            <option value="bn">বাংলা</option>
-          </select>
-        </div>
         {/* Header */}
         <div className="w-full text-center mt-10 mb-2">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-200 to-purple-400 drop-shadow-lg tracking-tight">SmartStock AI</h1>
