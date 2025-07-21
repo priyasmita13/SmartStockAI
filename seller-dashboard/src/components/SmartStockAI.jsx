@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { apiPost } from '../api';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
-const BACKEND_BASE = API_BASE.replace(/\/api$/, '');
+const BACKEND_BASE = process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL.replace(/\/api$/, '') : 'http://localhost:5000';
 
 const SidebarButton = ({ icon, label, href, active, disabled, onClick }) => {
   const Component = disabled ? 'button' : Link;
@@ -210,7 +210,11 @@ const SmartStockAI = ({ open, onClose }) => {
   const getPdfLink = (pdfUrl) => {
     if (!pdfUrl) return null;
     if (pdfUrl.startsWith('http')) return pdfUrl;
-    return `${BACKEND_BASE}${pdfUrl}`;
+    // Use the same env var as api.js for consistency
+    const backendBase = process.env.NEXT_PUBLIC_API_BASE_URL
+      ? process.env.NEXT_PUBLIC_API_BASE_URL.replace(/\/api$/, '')
+      : 'http://localhost:5000';
+    return `${backendBase}${pdfUrl}`;
   };
 
   return (
