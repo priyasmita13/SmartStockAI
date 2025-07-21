@@ -339,6 +339,6 @@ npm run build
 
 # Start production server
 npm start
-
+```
 
 **SmartStock AI** - Empowering ecommerce businesses with intelligent inventory management and AI-driven insights. 
