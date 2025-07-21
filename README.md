@@ -339,27 +339,6 @@ npm run build
 
 # Start production server
 npm start
-```
 
-## 🤝 **Contributing**
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
-
-## 📄 **License**
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🆘 **Support**
-
-For support and questions:
-- Create an issue in the repository
-- Contact the development team
-- Check the documentation
-
----
 
 **SmartStock AI** - Empowering ecommerce businesses with intelligent inventory management and AI-driven insights. 
