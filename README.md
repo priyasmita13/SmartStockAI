@@ -89,7 +89,7 @@ SmartStockAI/
 
 ### **Prerequisites**
 - Node.js 18+ and npm
-- Python 3.8+
+- Python 3.10.x
 - Git
 
 ### **1. Clone and Setup**
