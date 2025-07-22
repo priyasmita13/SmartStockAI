@@ -119,8 +119,8 @@ npm run dev
 ```
 
 ### **4. Access the Application**
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:5000
+- **Frontend**: https://smart-stock-ai-ivory.vercel.app/
+- **Backend API**: https://smartstockai.onrender.com/
 
 ## 🎯 **Key Features**
 
@@ -342,3 +342,37 @@ npm start
 ```
 
 **SmartStock AI** - Empowering ecommerce businesses with intelligent inventory management and AI-driven insights. 
+
+Here is the updated `README.md` section with the **Open Source Attribution** tables (backend and frontend) from the screenshots included under a new heading.
+
+---
+
+## 🧾 **Open Source Attribution**
+
+### 🔧 Backend
+
+| Name       | Version | License      | Purpose                    | Source                                            |
+| ---------- | ------- | ------------ | -------------------------- | ------------------------------------------------- |
+| Flask      | 2.3.3   | BSD-3-Clause | REST API framework         | [Link](https://github.com/pallets/flask)          |
+| Flask-Cors | 4.0.0   | MIT          | Handles CORS for Flask     | [Link](https://github.com/corydolphin/flask-cors) |
+| pandas     | 2.1.1   | BSD-3-Clause | Data processing            | [Link](https://github.com/pandas-dev/pandas)      |
+| matplotlib | 3.7.2   | PSF/BSD      | Chart plotting             | [Link](https://github.com/matplotlib/matplotlib)  |
+| seaborn    | 0.12.2  | BSD-3-Clause | Statistical visualizations | [Link](https://github.com/mwaskom/seaborn)        |
+| fpdf       | 1.7.2   | LGPL         | PDF generation             | [Link](https://github.com/reingart/pyfpdf)        |
+| numpy      | 1.24.3  | BSD-3-Clause | Numeric operations         | [Link](https://github.com/numpy/numpy)            |
+| requests   | 2.31.0  | Apache-2.0   | HTTP requests              | [Link](https://github.com/psf/requests)           |
+
+
+### 💻 Frontend Technologies
+
+| Name                   | Version | License    | Purpose                        | Source                                              |
+| ---------------------- | ------- | ---------- | ------------------------------ | --------------------------------------------------- |
+| react                  | 19.1.0  | MIT        | UI library                     | [Link](https://github.com/facebook/react)           |
+| react-dom              | 19.1.0  | MIT        | React DOM rendering            | [Link](https://github.com/facebook/react)           |
+| next                   | 15.3.5  | MIT        | React framework (SSR, routing) | [Link](https://github.com/vercel/next.js)           |
+| @radix-ui/react-dialog | 1.1.14  | MIT        | Modal component                | [Link](https://github.com/radix-ui/primitives)      |
+| @radix-ui/react-tabs   | 1.1.12  | MIT        | Tabs UI component              | [Link](https://github.com/radix-ui/primitives)      |
+| @radix-ui/react-toast  | 1.2.14  | MIT        | Toast notifications            | [Link](https://github.com/radix-ui/primitives)      |
+| i18next                | 25.3.2  | MIT        | Internationalization           | [Link](https://github.com/i18next/i18next)          |
+| tailwindcss            | 4.1.11  | MIT        | Utility-first CSS              | [Link](https://github.com/tailwindlabs/tailwindcss) |
+| typescript             | 5.8.3   | Apache-2.0 | Static typing for JS           | [Link](https://github.com/microsoft/TypeScript)     |
